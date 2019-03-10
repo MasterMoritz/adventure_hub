@@ -1,5 +1,12 @@
 # adventure_hub
 
+## Who is working on this Project?
+Andreas Moritz (S1810629007)
+Carina Rogl (S1810629009)
+
+## What is this project about?
+A SPA where you can create and play "choose your own adventure" type of games.
+
 ## Project setup
 ```
 npm install
