@@ -4,8 +4,10 @@ import router from "./router";
 import store from "./store";
 import './style.css';
 import "./registerServiceWorker";
+import Notifications from 'vue-notification';
 
 Vue.config.productionTip = false;
+Vue.use(Notifications);
 
 new Vue({
   router,
@@ -22,3 +24,6 @@ new Vue({
   },
   render: h => h(App)
 }).$mount("#app");
+
+
+

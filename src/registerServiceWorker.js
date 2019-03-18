@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 
 import { register } from "register-service-worker";
+import Vue from 'vue';
 
 if (process.env.NODE_ENV === "production") {
   register(`${process.env.BASE_URL}service-worker.js`, {
@@ -20,6 +21,11 @@ if (process.env.NODE_ENV === "production") {
       console.log("New content is downloading.");
     },
     updated() {
+      Vue.notify({
+        group: 'global-notification',
+        title: 'Content Update available',
+        text: 'New content is available! Please refresh cache.'
+      });
       console.log("New content is available; please refresh.");
     },
     offline() {
