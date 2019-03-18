@@ -1,18 +1,35 @@
 <template>
-  <div class="overview">
-    <img alt="Vue logo" src="../assets/header.png" />
-    <HelloWorld msg="See all Games on Adventure Hub" />
+  <div>
+    <List msg="See all Adventures on Adventure Hub" />
+    
+    <ol>
+        <li v-for="todo in todos" :key="todo.text">
+        {{ todo.text }}
+        </li>
+    </ol>
+
+
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-//import HelloWorld from "@/components/HelloWorld.vue";
+import List from "@/components/OverviewComponent.vue";
 
 export default {
-  name: "overview",
+  name: "Overview",
   components: {
-    HelloWorld
-  }
+    List
+  },
+  data: function() {
+    const props = {
+    todos: [
+      { text: 'Learn JavaScript' },
+      { text: 'Learn Vue' },
+      { text: 'Build something awesome' }
+    ]};
+    
+    return props;
+  },
 };
 </script>

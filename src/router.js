@@ -26,6 +26,13 @@ export default new Router({
       // route level code-splitting
       component: () =>
         import("./views/Create.vue")
+    },
+    {
+      path: "/overview",
+      name: "overview",
+      // route level code-splitting
+      component: () =>
+        import("./views/Overview.vue")
     }
   ]
 });
