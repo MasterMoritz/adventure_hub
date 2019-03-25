@@ -1,19 +1,24 @@
 <template>
-<div class="adv-panel-content">
-    <div class="adv-panel-title">
-        <h3>{{title}}</h3>
-    </div>
-    <hr>
-    <div class="adv-panel-img"></div>
-    <hr>
-    <div class="adv-panel-text">
-        {{text}}
-    </div>
-    <hr>
-    <div class="adv-panel-choices">
-        {{choices}}
-    </div>
-</div>
+<v-container>
+    <v-layout row wrap>
+        <v-flex xs12>
+            <h3>{{title}}</h3>
+        </v-flex>
+        <v-flex xs12>
+            <div class="adv-panel-img"></div>
+        </v-flex>
+        <v-flex xs12>
+            <div class="adv-panel-text">
+                {{text}}
+            </div>
+        </v-flex>
+        <v-flex xs12>
+            <div class="adv-panel-choices">
+                {{choices}}
+            </div>
+        </v-flex>
+    </v-layout>
+</v-container>
 </template>
 
 <script>
