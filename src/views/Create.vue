@@ -1,6 +1,5 @@
 <template>
   <div>
-    <img alt="Vue logo" src="../assets/logo.png" />
     <CreatePanel title="MyTestAdventure" text="My Test text <br> \n Trying some stuff out." choices="placeholder"/>
       <div class="example">
         sample adventures graphQL query:
