@@ -9,7 +9,7 @@
       <router-link to="/overview">Overview</router-link>
     </div>
     <div id="header">
-     <img alt="AdventureHub Logo" src="./assets/header.png" />
+     <!-- <img alt="AdventureHub Logo" src="./assets/header.png" /> -->
     </div>
     <router-view />
   </div>
