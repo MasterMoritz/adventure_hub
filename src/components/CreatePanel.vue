@@ -8,9 +8,10 @@
             <div class="adv-panel-img"></div>
         </v-flex>
         <v-flex xs12>
-            <div class="adv-panel-text">
-                {{text}}
-            </div>
+            <v-textarea rows=20>
+
+            </v-textarea>
+                
         </v-flex>
         <v-flex xs12>
             <div class="adv-panel-choices">

@@ -30,7 +30,6 @@ new Vue({
 
   //el: '#app-4',
   data: {
-    hello:[],
     todos: [
       { text: 'Learn JavaScript' },
       { text: 'Learn Vue' },
