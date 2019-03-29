@@ -20,6 +20,9 @@
         <div class="adv-panel-choices">{{choices}}</div>
       </v-flex>
     </v-layout>
+    <v-layout row>
+        
+    </v-layout>
   </v-container>
 </template>
 

@@ -25,7 +25,7 @@ export default new Router({
       name: "create",
       // route level code-splitting
       component: () =>
-        import("./views/Create.vue")
+        import("./views/NewAdventure.vue")
     },
     {
       path: "/overview",
