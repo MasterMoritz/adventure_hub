@@ -57,10 +57,13 @@ export default {
 
         // Result
         this.error = false;
+        
         alert(
           "i got clicked! new key = " +
             result.data["insert_adventure"]["returning"][0]["adventureKey"]
         );
+        this.$router.push({name:'home'});
+
       } catch (err) {
         this.error = true;
       }
