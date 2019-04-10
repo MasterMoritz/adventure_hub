@@ -56,7 +56,7 @@ export default {
         });
 
         // Result
-        this.error = true;
+        this.error = false;
         alert(
           "i got clicked! new key = " +
             result.data["insert_adventure"]["returning"][0]["adventureKey"]
