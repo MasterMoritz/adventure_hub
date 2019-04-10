@@ -1,6 +1,5 @@
 <template>
-
-  <div id="app">
+  <v-app>
     <notifications group="global-notification" />
     <div id="nav">
       <router-link to="/">Home</router-link> |
@@ -12,6 +11,6 @@
      <!-- <img alt="AdventureHub Logo" src="./assets/header.png" /> -->
     </div>
     <router-view />
-  </div>
+  </v-app>
 </template>
 

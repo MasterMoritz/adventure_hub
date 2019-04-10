@@ -9,6 +9,7 @@ import ApolloClient from 'apollo-boost';
 import VueApollo from 'vue-apollo';
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.min.css';
+import 'material-design-icons-iconfont/dist/material-design-icons.css';
 
 Vue.config.productionTip = false;
 Vue.use(Notifications);
