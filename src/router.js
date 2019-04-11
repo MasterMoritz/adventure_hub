@@ -28,6 +28,14 @@ export default new Router({
         import("./views/NewAdventure.vue")
     },
     {
+      path: "/adventure/edit",
+      name: "editAdventure",
+      // route level code-splitting
+      component: () =>
+        import("./views/EditAdventure.vue"),
+        props:true
+    },
+    {
       path: "/overview",
       name: "overview",
       // route level code-splitting

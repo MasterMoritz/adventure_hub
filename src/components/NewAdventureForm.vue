@@ -24,6 +24,7 @@
 
 <script>
 import gql from "graphql-tag";
+import { log } from 'util';
 
 export default {
   name: "NewAdventureForm",
@@ -44,7 +45,8 @@ export default {
             mutation($name: String!) {
               insert_adventure(objects: { name: $name }) {
                 returning {
-                  adventureKey
+                  adventureKey,
+                  name
                 }
               }
             }
@@ -58,13 +60,13 @@ export default {
         // Result
         this.error = false;
         
-        alert(
-          "i got clicked! new key = " +
-            result.data["insert_adventure"]["returning"][0]["adventureKey"]
-        );
-        this.$router.push({name:'home'});
+        var createdKey = result.data["insert_adventure"]["returning"][0]["adventureKey"];
+        
+        await this.$store.dispatch('edit/currentAdventure', {apolloClient: this.$apollo, id: createdKey});
+        this.$router.push({name:'editAdventure', params: {adventureId:createdKey}});
 
       } catch (err) {
+        log(err);
         this.error = true;
       }
 
