@@ -27,6 +27,12 @@
     </v-layout>
     <v-layout row>
       <v-flex xs12 lg6 md8>
+        <v-card dark>
+          <v-card-title primary-title><p>Choices</p></v-card-title>
+          <v-btn fab small color="indigo accent-3" bottom left absolute dark>
+            <v-icon>add</v-icon>
+          </v-btn>
+        </v-card>
         <v-list dark two-line>
           <v-list-tile v-for="(item, index) in pages" :key="item">
             <v-list-tile-content>
