@@ -28,7 +28,9 @@
     <v-layout row>
       <v-flex xs12 lg6 md8>
         <v-card dark>
-          <v-card-title primary-title><p>Choices</p></v-card-title>
+          <v-card-title primary-title>
+            <p>Choices</p>
+          </v-card-title>
           <v-btn fab small color="indigo accent-3" bottom left absolute dark>
             <v-icon>add</v-icon>
           </v-btn>
@@ -53,7 +55,10 @@
         <div class="adv-panel-choices">{{choices}}</div>
       </v-flex>
     </v-layout>
-    <v-layout row></v-layout>
+
+    <v-btn fab color="indigo accent-4" dark bottom right fixed>
+      <v-icon>save</v-icon>
+    </v-btn>
   </v-container>
 </template>
 
