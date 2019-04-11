@@ -17,7 +17,7 @@ Vue.use(VueApollo);
 Vue.use(Vuetify);
 
 const apolloClient = new ApolloClient({
-  uri: 'http://adventurehub.herokuapp.com/v1alpha1/graphql'
+  uri: 'https://adventurehub.herokuapp.com/v1alpha1/graphql'
 })
 const apolloProvider = new VueApollo({
   defaultClient: apolloClient,
