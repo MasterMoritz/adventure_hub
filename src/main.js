@@ -1,5 +1,5 @@
 import Vue from "vue";
-import App from "./App.vue";
+
 import router from "./router";
 import store from "./store";
 import './style.css';
@@ -10,6 +10,7 @@ import VueApollo from 'vue-apollo';
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.min.css';
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
+import App from "./App.vue";
 
 Vue.config.productionTip = false;
 Vue.use(Notifications);

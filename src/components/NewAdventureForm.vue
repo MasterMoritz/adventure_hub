@@ -7,7 +7,7 @@
     >Oops, something went wrong. Please try again.</v-alert>
     <v-container>
       <v-layout row justify-center>
-        <v-flex xs12 sm6 md4>
+        <v-flex xs12 sm8 md6 lg4>
           <v-text-field label="Title" v-model="title"></v-text-field>
         </v-flex>
       </v-layout>
