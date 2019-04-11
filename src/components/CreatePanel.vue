@@ -1,20 +1,20 @@
 <template>
   <v-container>
-    <v-layout row>
-      <v-flex xs8 md6>
+    <v-layout row justify-center>
+      <v-flex xs6 md4>
         <v-text-field label="Page Title (Optional)" v-model="pageTitle"></v-text-field>
       </v-flex>
       <v-flex offset-xs1 xs2 md1>
         <v-text-field type="Number" label="Page Number" v-model="pageNumber"></v-text-field>
       </v-flex>
     </v-layout>
-    <v-layout row>
+    <v-layout row justify-center>
       <v-flex xs12>
         <div class="adv-panel-img"></div>
       </v-flex>
     </v-layout>
-    <v-layout row>
-      <v-flex xs11>
+    <v-layout row justify-center> 
+      <v-flex xs12 lg6 md8 justify-center>
         <v-textarea
           label="Text"
           :disabled="!editText"
@@ -25,7 +25,7 @@
         ></v-textarea>
       </v-flex>
     </v-layout>
-    <v-layout row>
+    <v-layout row justify-center>
       <v-flex xs12 lg6 md8>
         <v-card dark>
           <v-card-title primary-title>
