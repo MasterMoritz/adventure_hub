@@ -10,7 +10,7 @@
 import Overview from "@/components/OverviewComponent.vue";
 
 export default {
-  name: "List",
+  name: "OverviewView",
   props: {
     msg: String
   },
