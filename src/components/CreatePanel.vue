@@ -1,11 +1,11 @@
 <template>
   <v-container>
     <v-layout row justify-center>
-      <v-flex xs6 md4>
-        <v-text-field label="Page Title (Optional)" v-model="pageTitle"></v-text-field>
+      <v-flex xs9 md8 lg6>
+        <v-text-field label="Page Title (Optional)" v-model="page.title"></v-text-field>
       </v-flex>
-      <v-flex offset-xs1 xs2 md1>
-        <v-text-field type="Number" label="Page Number" v-model="pageNumber"></v-text-field>
+      <v-flex offset-xs1 xs2 md1 lg1>
+        <v-text-field type="Number" label="Page Number" v-model="page.pageNr"></v-text-field>
       </v-flex>
     </v-layout>
     <v-layout row justify-center>
@@ -13,12 +13,12 @@
         <div class="adv-panel-img"></div>
       </v-flex>
     </v-layout>
-    <v-layout row justify-center> 
-      <v-flex xs12 lg6 md8 justify-center>
+    <v-layout row justify-center>
+      <v-flex xs12 lg8 md10 justify-center>
         <v-textarea
           label="Text"
           :disabled="!editText"
-          v-model="pageContent"
+          v-model="page.content"
           box
           no-resize
           rows="15"
@@ -26,7 +26,7 @@
       </v-flex>
     </v-layout>
     <v-layout row justify-center>
-      <v-flex xs12 lg6 md8>
+      <v-flex xs12 lg8 md10>
         <v-card dark>
           <v-card-title primary-title>
             <p>Choices</p>
@@ -38,7 +38,7 @@
         <v-list dark two-line>
           <v-list-tile v-for="(item) in decisions" :key="item.sortOrder">
             <v-list-tile-content>
-              <v-text-field outline placeholder="Description" v-model="item.Content"></v-text-field>
+              <v-text-field box placeholder="Description" v-model="item.Content"></v-text-field>
             </v-list-tile-content>
             <v-list-tile-action>
               <v-autocomplete
@@ -64,6 +64,7 @@
 <script>
 import gql from "graphql-tag";
 
+import { log } from "util";
 export default {
   name: "CreatePanel",
   data() {
@@ -71,14 +72,14 @@ export default {
       pageTitle: "Test",
       pageContent: this.text,
       pageId: 0,
-      pageNumber:0,
+      pageNumber: 0,
       editText: true,
       newPages: [],
       decisions: [],
-      decicision: {
-        Content: String,
-        sortOrder: Number,
-        toPage: Number
+      page: {
+        pageNr: null,
+        content: "",
+        title: ""
       }
     };
   },
@@ -99,20 +100,28 @@ export default {
     addChoice() {
       this.decisions.push({
         Content: "",
-        sortOrder: this.decisions.length+1,
+        sortOrder: this.decisions.length + 1,
         toPage: this.pageNumber
       });
     }
   },
   apollo: {
-    decisions: {
+    pageData: {
       // Simple query that will update the 'hello' vue property
       query: gql`
         query getDecisions($key: Int!) {
-          decisions:     decision(where: {pageId: {_eq: $key}}, order_by: {sortOrder: asc}) {
+          decisions: decision(
+            where: { pageId: { _eq: $key } }
+            order_by: { sortOrder: asc }
+          ) {
             Content
             sortOrder
             toPage
+          }
+          page: page_by_pk(pageId: $key) {
+            pageNr
+            content
+            title
           }
         }
       `,
@@ -120,6 +129,15 @@ export default {
         return {
           key: this.pageId
         };
+      },
+      update(data) {
+        return { decisions: data.decisions, page: data.page };
+      },
+      result(data) {
+        this.decisions = data.data.decisions;
+        if (data.data.page !== null) {
+          this.page = data.data.page;
+        }
       }
     }
   }
