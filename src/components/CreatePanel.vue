@@ -36,13 +36,18 @@
           </v-btn>
         </v-card>
         <v-list dark two-line>
-          <v-list-tile v-for="(item) in decisions" :key="item.sortOrder">
+          <v-list-tile v-for="(item, index) in decisions" :key="index">
+            <v-list-tile-avatar>
+                <v-icon color="indigo accent-1" @click="removeChoice(index)">delete</v-icon>
+            </v-list-tile-avatar>
+
             <v-list-tile-content>
-              <v-text-field box placeholder="Description" v-model="item.Content"></v-text-field>
+              <v-text-field box placeholder="Description" v-model="item.content"></v-text-field>
             </v-list-tile-content>
+            
             <v-list-tile-action>
               <v-autocomplete
-                v-model="item.toPage"
+                v-model="item.to_page"
                 hint="Link this choice to a page"
                 persistent-hint
                 :items="pages"
@@ -69,13 +74,11 @@ export default {
   name: "CreatePanel",
   data() {
     return {
-      pageTitle: "Test",
-      pageContent: this.text,
-      pageNumber: 0,
       editText: true,
-      newPages: [],
       decisions: [],
+      deletedDecisions:[],
       page: {
+        page_id: this.pageId,
         page_nr: null,
         content: "",
         title: ""
@@ -95,30 +98,45 @@ export default {
   },
   methods: {
     addChoice() {
-      this.decisions.push({
-        Content: "",
-        sortOrder: this.decisions.length + 1,
-        toPage: this.pageNumber
-      });
+      var choice = {
+        content: "",
+        sort_order: this.decisions.length + 1,
+        to_page: this.pageNumber,
+        isNew: true
+      };
+      this.decisions.push(choice);
+    },
+    removeChoice(index) {
+      if (this.decisions[index].isNew !== true) {
+        this.deletedDecisions.push(this.decisions[index]);
+      }
+      this.decisions.splice(index,1);
     },
     async savePage() {
-      this.$emit('savePage', )
+      var updateDecisions = this.decisions.filter(function(element) {
+        return element.isNew !== true;
+      });
+      var insertDecisions = this.decisions.filter(function(element) {
+        return element.isNew === true;
+      });
+      this.$emit('savePage', {page: this.page, decisions: {update:updateDecisions, insert:insertDecisions, delete:this.deletedDecisions}});
     }
   },
   apollo: {
     pageData: {
-      // Simple query that will update the 'hello' vue property
       query: gql`
         query getDecisions($key: Int!) {
           decisions: decision(
-            where: { pageId: { _eq: $key } }
-            order_by: { sortOrder: asc }
+            where: { page_id: { _eq: $key } }
+            order_by: { sort_order: asc }
           ) {
-            Content
-            sortOrder
-            toPage
+            id
+            content
+            sort_order
+            to_page
           }
           page: page_by_pk(page_id: $key) {
+            page_id
             page_nr
             content
             title
