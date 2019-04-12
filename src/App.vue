@@ -52,7 +52,6 @@ export default {
       drawer: false,
       items: [
         { title: 'Home', icon: 'dashboard', route: '/', id: 'home' },
-        { title: 'About', icon: 'account_box', route: '/about', id: 'about' },
         { title: 'Create Adventure', icon: 'gavel' , route: '/create', id: 'create' },
         { title: 'Overview', icon: 'gavel', route: '/overview', id: 'overview' }
       ]
