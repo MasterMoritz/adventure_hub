@@ -97,6 +97,8 @@ export default {
       this.$store.commit("edit/currentPage", {
         id: result.data["insert_page"]["returning"][0]["page_id"]
       });
+
+      this.$apollo.queries.numbers.refetch();
     },
     async updatePage(pageData) {
       try {
@@ -133,7 +135,7 @@ export default {
             pageTitle: pageData.page.title
           }
         });
-        this.$apollo.queries.numbers.refetch();
+        
         //log("affected rows: " + result.data.update_page.affected_rows);
 
         //update choices
