@@ -1,5 +1,7 @@
 <template>
   <div>
+    <h1 class="mb-4">Discover all Adventures</h1>
+
     <v-card>
       <v-container fluid grid-list-lg>
         <v-layout row wrap>
