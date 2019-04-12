@@ -47,7 +47,6 @@
 </template>
 <script>
 export default {
-  name: "toolbar",
   data() {
     return{
       drawer: false,

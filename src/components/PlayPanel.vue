@@ -5,7 +5,9 @@
         <span>{{page.title}}</span>
       </v-card-title>
       <v-card-text>
-        {{page.content}}
+        <div class="adventure-text">
+          {{page.content}}
+        </div>
       </v-card-text>
       <v-card-actions>
         <v-btn @click="changePage(item.to_page)" v-for="(item, index) in decisions" :key="index" flat color="deep-orange darken-1">{{item.content}}</v-btn>
