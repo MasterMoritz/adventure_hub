@@ -10,7 +10,7 @@
         <v-layout row wrap>
           <v-flex xs12 m6 lg3 v-for="adventure in advData"  
           :key="adventure.adventureKey">
-            <v-card color="indigo lighten-2" class="white--text">
+            <v-card color="indigo lighten-4" class="black--text">
               <v-layout>
                 <v-flex xs5 v-if="adventure.image!== null">
                   <v-img :src="adventure.image" height="125px" contain></v-img>
@@ -27,7 +27,7 @@
               </v-layout>
               <v-divider light></v-divider>
               <v-card-actions>
-                  <v-btn flat dark>Discover now</v-btn>
+                  <v-btn flat>Discover now</v-btn>
                 </v-card-actions>
             </v-card>
           </v-flex>
