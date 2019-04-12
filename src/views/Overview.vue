@@ -1,68 +1,23 @@
 <template>
-  <div>
-    <List msg="See all Adventures on Adventure Hub"/>
-     <v-card-title>
-        Adventures
-     </v-card-title>  
+  <div class="overviewBody">
+    <h1 class="mb-4">Discover all Adventures</h1>
 
-    <v-card>
-      <v-container fluid grid-list-lg>
-        <v-layout row wrap>
-          <v-flex xs12 m6 lg3 v-for="adventure in advData"  
-          :key="adventure.adventureKey">
-            <v-card color="indigo lighten-4" class="black--text">
-              <v-layout>
-                <v-flex xs5 v-if="adventure.image!== null">
-                  <v-img :src="adventure.image" height="125px" contain></v-img>
-                </v-flex>
-                <v-flex xs7>
-                  <v-card-title primary-title>
-                    <div>
-                      <div class="headline">{{adventure.name}}</div>
-                      <span>ID: {{adventure.adventureKey}}</span>
-                      <span> {{adventure.description}}</span>
-                    </div>
-                  </v-card-title>
-                </v-flex>
-              </v-layout>
-              <v-divider light></v-divider>
-              <v-card-actions>
-                  <v-btn flat>Discover now</v-btn>
-                </v-card-actions>
-            </v-card>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-card>
-        
+    <Overview title="All Adventures"/>
   </div>
 </template>
 
-
 <script>
-// @ is an alias to /src
-import List from "@/components/OverviewComponent.vue";
-import gql from "graphql-tag";
+import Overview from "@/components/OverviewComponent.vue";
 
 export default {
-  name: "Overview",
+  name: "List",
+  props: {
+    msg: String
+  },
   components: {
-    List
-  },
-  apollo: {
-    // Simple query that will update the 'advData' vue property
-    advData: gql`
-      query {
-        advData: adventure {
-          adventureKey
-          name
-          image
-          description
-        }
-      }
-    `
-  },
-  
-}
-
+    Overview
+  }
+};
 </script>
+
+
