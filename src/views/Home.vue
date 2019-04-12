@@ -1,6 +1,6 @@
 <template>
+  
   <div class="home">
-    <img alt="Vue logo" src="../assets/header.png" />
     <HelloWorld msg="Welcome to Adventure Hub" />
   </div>
 </template>
