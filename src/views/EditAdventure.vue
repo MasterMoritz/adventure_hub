@@ -17,7 +17,6 @@
 // @ is an alias to /src
 import CreatePanel from "@/components/CreatePanel.vue";
 import gql from "graphql-tag";
-import { log } from "util";
 
 export default {
   name: "EditAdventure",

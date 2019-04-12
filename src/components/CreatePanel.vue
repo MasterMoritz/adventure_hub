@@ -31,18 +31,18 @@
           <v-card-title primary-title>
             <p>Choices</p>
           </v-card-title>
-          <v-btn fab small color="indigo accent-3" bottom left absolute dark>
+          <v-btn fab small color="indigo accent-3" bottom left absolute dark @click="addChoice">
             <v-icon>add</v-icon>
           </v-btn>
         </v-card>
         <v-list dark two-line>
-          <v-list-tile v-for="(item, index) in pages" :key="item">
+          <v-list-tile v-for="(item) in decisions" :key="item.sortOrder">
             <v-list-tile-content>
-              <v-list-tile-title v-text="item"></v-list-tile-title>
+              <v-text-field outline placeholder="Description" v-model="item.Content"></v-text-field>
             </v-list-tile-content>
             <v-list-tile-action>
               <v-autocomplete
-                v-model="newPages[index]"
+                v-model="item.toPage"
                 hint="Link this choice to a page"
                 persistent-hint
                 :items="pages"
@@ -52,7 +52,6 @@
             </v-list-tile-action>
           </v-list-tile>
         </v-list>
-        <div class="adv-panel-choices">{{choices}}</div>
       </v-flex>
     </v-layout>
 
@@ -63,7 +62,7 @@
 </template>
 
 <script>
-import { log } from "util";
+import gql from "graphql-tag";
 
 export default {
   name: "CreatePanel",
@@ -71,9 +70,16 @@ export default {
     return {
       pageTitle: "Test",
       pageContent: this.text,
-      pageNumber: 0,
+      pageId: 0,
+      pageNumber:0,
       editText: true,
-      newPages: []
+      newPages: [],
+      decisions: [],
+      decicision: {
+        Content: String,
+        sortOrder: Number,
+        toPage: Number
+      }
     };
   },
   props: {
@@ -84,10 +90,37 @@ export default {
   },
   computed: {
     pages() {
-      log(this.pageNumbers);
       return this.pageNumbers.map(function(obj) {
         return obj.pageNr;
       });
+    }
+  },
+  methods: {
+    addChoice() {
+      this.decisions.push({
+        Content: "",
+        sortOrder: this.decisions.length+1,
+        toPage: this.pageNumber
+      });
+    }
+  },
+  apollo: {
+    decisions: {
+      // Simple query that will update the 'hello' vue property
+      query: gql`
+        query getDecisions($key: Int!) {
+          decisions:     decision(where: {pageId: {_eq: $key}}, order_by: {sortOrder: asc}) {
+            Content
+            sortOrder
+            toPage
+          }
+        }
+      `,
+      variables() {
+        return {
+          key: this.pageId
+        };
+      }
     }
   }
 };
