@@ -1,7 +1,5 @@
 <template>
   <div class="overviewBody">
-    <h1 class="mb-4">Discover all Adventures</h1>
-
     <Overview title="All Adventures"/>
   </div>
 </template>
