@@ -15,7 +15,7 @@
                   <v-card-title primary-title>
                     <div>
                       <div class="headline">{{adventure.name}}</div>
-                      <span>ID: {{adventure.adventureKey}}</span>
+                      <br>
                       <span>{{adventure.description}}</span>
                     </div>
                   </v-card-title>
