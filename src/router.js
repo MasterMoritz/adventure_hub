@@ -36,6 +36,14 @@ export default new Router({
         props:true
     },
     {
+      path: "/adventure/play",
+      name: "playAdventure",
+      // route level code-splitting
+      component: () =>
+        import("./views/PlayAdventure.vue"),
+        props:true
+    },
+    {
       path: "/overview",
       name: "overview",
       // route level code-splitting

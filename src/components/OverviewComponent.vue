@@ -24,7 +24,7 @@
               <v-divider light></v-divider>
               <v-card-actions>
                 <v-layout justify-space-around>
-                  <v-btn flat>Play</v-btn>
+                  <v-btn @click="play(adventure.adventureKey)" flat>Play</v-btn>
                 </v-layout>
               </v-card-actions>
             </v-card>
@@ -39,6 +39,7 @@
 <script>
 // @ is an alias to /src
 import gql from "graphql-tag";
+import { log } from "util";
 
 export default {
   name: "Overview",
@@ -54,6 +55,12 @@ export default {
         }
       }
     `
+  },
+  methods: {
+    async play(value) {
+      await this.$store.dispatch('play/currentAdventure', {apolloClient: this.$apollo, id: value});
+        this.$router.push({name:'playAdventure', params: {adventureId:value}});
+    }
   }
 };
 </script>

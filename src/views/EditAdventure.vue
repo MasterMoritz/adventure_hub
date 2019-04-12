@@ -62,7 +62,7 @@ export default {
   },
   methods: {
     async gotoPage() {
-      this.$store.dispatch("edit/changeCurrentPage", {
+      await this.$store.dispatch("edit/changeCurrentPage", {
         apolloClient: this.$apollo,
         pageNr: this.gotoPageNr
       });
@@ -97,7 +97,6 @@ export default {
       this.$store.commit("edit/currentPage", {
         id: result.data["insert_page"]["returning"][0]["page_id"]
       });
-      this.$apollo.queries.numbers.refetch();
     },
     async updatePage(pageData) {
       try {
@@ -200,6 +199,7 @@ export default {
             }
           });
         }
+        //delete choices
         decisionLength = pageData.decisions.delete.length;
         for (var i = 0; i < decisionLength; i++) {
           const result = await this.$apollo.mutate({
@@ -218,7 +218,7 @@ export default {
           });
         }
 
-        //delete choices
+        this.$apollo.queries.numbers.refetch();
       } catch (err) {
         log(err);
       }
