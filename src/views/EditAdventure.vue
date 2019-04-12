@@ -38,8 +38,8 @@ export default {
       // Simple query that will update the 'hello' vue property
       query: gql`
         query getPagesNumbers($key: Int!) {
-          numbers: page(where: { adventureKey: { _eq: 2 } }) {
-            pageNr
+          numbers: page(where: { adventure_key: { _eq: 2 } }) {
+            page_nr
           }
         }
       `,

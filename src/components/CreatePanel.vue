@@ -5,7 +5,7 @@
         <v-text-field label="Page Title (Optional)" v-model="page.title"></v-text-field>
       </v-flex>
       <v-flex offset-xs1 xs2 md1 lg1>
-        <v-text-field type="Number" label="Page Number" v-model="page.pageNr"></v-text-field>
+        <v-text-field type="Number" label="Page Number" v-model="page.page_nr"></v-text-field>
       </v-flex>
     </v-layout>
     <v-layout row justify-center>
@@ -55,7 +55,7 @@
       </v-flex>
     </v-layout>
 
-    <v-btn fab color="indigo accent-4" dark bottom right fixed>
+    <v-btn fab color="indigo accent-4" dark bottom right fixed @click="savePage">
       <v-icon>save</v-icon>
     </v-btn>
   </v-container>
@@ -77,7 +77,7 @@ export default {
       newPages: [],
       decisions: [],
       page: {
-        pageNr: null,
+        page_nr: null,
         content: "",
         title: ""
       }
@@ -92,7 +92,7 @@ export default {
   computed: {
     pages() {
       return this.pageNumbers.map(function(obj) {
-        return obj.pageNr;
+        return obj.page_nr;
       });
     }
   },
@@ -103,6 +103,9 @@ export default {
         sortOrder: this.decisions.length + 1,
         toPage: this.pageNumber
       });
+    },
+    async savePage() {
+
     }
   },
   apollo: {
@@ -118,8 +121,8 @@ export default {
             sortOrder
             toPage
           }
-          page: page_by_pk(pageId: $key) {
-            pageNr
+          page: page_by_pk(page_id: $key) {
+            page_nr
             content
             title
           }
