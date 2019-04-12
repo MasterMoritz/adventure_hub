@@ -1,7 +1,5 @@
 import { expect } from "chai";
-import { shallow } from "@vue/test-utils";
-import { shallowMount } from "@vue/test-utils";
-import { mount } from '@vue/test-utils'
+import { shallow, shallowMount, mount, createLocalVue } from "@vue/test-utils";
 import Overview from "@/components/OverviewComponent.vue";
 import CreatePanel from "@/components/CreatePanel.vue";
 
@@ -35,8 +33,7 @@ describe("Overview.vue", () => {
       }
     })
 
-    expect(wrapper.find('.page.title').text().to.contain('test')
-    })
+    expect(wrapper.find('.page.title').text().to.contain('test'))
 
   })
 
