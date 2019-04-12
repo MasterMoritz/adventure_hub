@@ -38,13 +38,13 @@
         <v-list dark two-line>
           <v-list-tile v-for="(item, index) in decisions" :key="index">
             <v-list-tile-avatar>
-                <v-icon color="indigo accent-1" @click="removeChoice(index)">delete</v-icon>
+              <v-icon color="indigo accent-1" @click="removeChoice(index)">delete</v-icon>
             </v-list-tile-avatar>
 
             <v-list-tile-content>
               <v-text-field box placeholder="Description" v-model="item.content"></v-text-field>
             </v-list-tile-content>
-            
+
             <v-list-tile-action>
               <v-autocomplete
                 v-model="item.to_page"
@@ -60,9 +60,16 @@
       </v-flex>
     </v-layout>
 
-    <v-btn fab color="indigo accent-4" dark bottom right fixed @click="savePage">
-      <v-icon>save</v-icon>
-    </v-btn>
+    <v-speed-dial fixed bottom right>
+      <template v-slot:activator>
+        <v-btn small fab color="indigo accent-4" dark @click="addPage">
+          <v-icon>add</v-icon>
+        </v-btn>
+        <v-btn fab color="indigo accent-4" dark @click="savePage">
+          <v-icon>save</v-icon>
+        </v-btn>
+      </template>
+    </v-speed-dial>
   </v-container>
 </template>
 
@@ -76,12 +83,13 @@ export default {
     return {
       editText: true,
       decisions: [],
-      deletedDecisions:[],
+      deletedDecisions: [],
       page: {
         page_id: this.pageId,
         page_nr: null,
         content: "",
-        title: ""
+        title: "",
+        toggle_none: null
       }
     };
   },
@@ -96,7 +104,16 @@ export default {
       });
     }
   },
+  watch: {
+    pageId: function(newVal, oldVal) {
+      this.deletedDecisions = [];
+      this.$apollo.queries.pageData.refetch();
+    }
+  },
   methods: {
+    async addPage() {
+      this.$emit("newPage");
+    },
     addChoice() {
       var choice = {
         content: "",
@@ -110,7 +127,7 @@ export default {
       if (this.decisions[index].isNew !== true) {
         this.deletedDecisions.push(this.decisions[index]);
       }
-      this.decisions.splice(index,1);
+      this.decisions.splice(index, 1);
     },
     async savePage() {
       var updateDecisions = this.decisions.filter(function(element) {
@@ -119,7 +136,16 @@ export default {
       var insertDecisions = this.decisions.filter(function(element) {
         return element.isNew === true;
       });
-      this.$emit('savePage', {page: this.page, decisions: {update:updateDecisions, insert:insertDecisions, delete:this.deletedDecisions}});
+      this.$emit("savePage", {
+        page: this.page,
+        decisions: {
+          update: updateDecisions,
+          insert: insertDecisions,
+          delete: this.deletedDecisions
+        }
+      });
+      this.deletedDecisions = [];
+      this.$apollo.queries.pageData.refetch();
     }
   },
   apollo: {

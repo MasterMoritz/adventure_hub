@@ -21,7 +21,12 @@
     </v-container>
 
     <v-divider inset></v-divider>
-    <CreatePanel :pageNumbers="numbers" :pageId="pageData.id" @savePage="updatePage"></CreatePanel>
+    <CreatePanel
+      :pageNumbers="numbers"
+      :pageId="pageData.id"
+      @savePage="updatePage"
+      @newPage="createPage"
+    ></CreatePanel>
   </div>
 </template>
 
@@ -62,7 +67,38 @@ export default {
         pageNr: this.gotoPageNr
       });
     },
-
+    async createPage() {
+      //generate page
+      const result = await this.$apollo.mutate({
+        // Query
+        mutation: gql`
+          mutation($advKey: Int!, $pageNr: Int!) {
+            insert_page(
+              objects: {
+                content: ""
+                page_nr: $pageNr
+                title: ""
+                adventure_key: $advKey
+              }
+            ) {
+              returning {
+                page_id
+              }
+            }
+          }
+        `,
+        // Parameters
+        variables: {
+          advKey: this.adventureData.id,
+          pageNr: Math.max(...this.flatPageNumbers) + 1
+        }
+      });
+      //update store state
+      this.$store.commit("edit/currentPage", {
+        id: result.data["insert_page"]["returning"][0]["page_id"]
+      });
+      this.$apollo.queries.numbers.refetch();
+    },
     async updatePage(pageData) {
       try {
         //update page
@@ -98,6 +134,7 @@ export default {
             pageTitle: pageData.page.title
           }
         });
+        this.$apollo.queries.numbers.refetch();
         //log("affected rows: " + result.data.update_page.affected_rows);
 
         //update choices
