@@ -10,16 +10,6 @@
       <v-toolbar-side-icon id="burgermenu" @click="drawer=!drawer"></v-toolbar-side-icon>
 
       <v-toolbar-title>Adventure Hub</v-toolbar-title>
-
-      <v-spacer></v-spacer>
-
-      <v-btn icon>
-        <v-icon>search</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>more_vert</v-icon>
-      </v-btn>
     </v-toolbar>
 
     <v-navigation-drawer dark app class="indigo darken-3 mt-5" v-model="drawer" >
