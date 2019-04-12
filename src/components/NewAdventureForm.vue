@@ -12,6 +12,17 @@
         </v-flex>
       </v-layout>
       <v-layout row justify-center>
+      <v-flex xs12 sm8 md6 lg4 justify-center>
+        <v-textarea
+          label="Description"
+          v-model="description"
+          box
+          no-resize
+          rows="10"
+        ></v-textarea>
+      </v-flex>
+    </v-layout>
+      <v-layout row justify-center>
         <v-flex xs1 align-center>
           <v-btn icon flat color="indigo accent-3" :loading="loading" @click="createAdventure">
             <v-icon large>check_circle_outline</v-icon>
@@ -32,7 +43,8 @@ export default {
     return {
       title: "",
       loading: false,
-      error: false
+      error: false,
+      description: ""
     };
   },
   methods: {
@@ -42,8 +54,8 @@ export default {
         const result = await this.$apollo.mutate({
           // Query
           mutation: gql`
-            mutation($name: String!) {
-              insert_adventure(objects: { name: $name }) {
+            mutation($name: String!, $description: String) {
+              insert_adventure(objects: { name: $name, description: $description }) {
                 returning {
                   adventureKey,
                   name
@@ -53,7 +65,8 @@ export default {
           `,
           // Parameters
           variables: {
-            name: this.title
+            name: this.title,
+            description: this.description
           }
         });
 
