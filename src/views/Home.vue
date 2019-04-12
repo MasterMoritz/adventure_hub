@@ -1,18 +1,20 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/header.png" />
-    <HelloWorld msg="Welcome to Adventure Hub" />
+  <div>
+  <h1>Welcome to the best Adventures! </h1>
+    <h4 class="black--text"> Ready to experience cool text adventures, create great stories on your own and have fun?</h4>
+
+    <img alt="AdventureHub Logo" src="../assets/header_db.png" />
+
   </div>
+ 
+ 
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+
 
 export default {
-  name: "home",
-  components: {
-    HelloWorld
-  }
+  
 };
 </script>

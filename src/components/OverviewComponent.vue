@@ -1,19 +1,7 @@
 <template>
   <div class="overviewBody">
     <h1>{{ msg }}</h1>
-    <h3>Available Adventures</h3>
-    <ul>
-      <li>
-        <p>Adventure 1</p>
-      </li>
-      <li>
-        <p>Adventure 2</p>
-      </li>
-      <li>
-        <p>Adventure 3</p>
-      </li>
-    </ul>
-    
+      
 
     
 </div>
@@ -25,6 +13,8 @@ export default {
   props: {
     msg: String
   },
+  
+  
   };
 
 </script>

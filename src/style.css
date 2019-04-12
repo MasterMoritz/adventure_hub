@@ -2,40 +2,11 @@ body {
     background-color: #dde8ee;
 }
 
-a {
-    color: #0ed5f2;
-}
-
-h1 {
-    color: #096394;
-}
-
-h2 {
-    color: #096394;
-}
-
-h3 {
-    color: #096394;
-}
-
 #app {
     font-family: "Avenir", Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: #2c3e50;
+    color: #283593;
 }
   
-#nav {
-    padding: 30px;
-  }
-  
-  #nav a {
-    font-weight: bold;
-    color: #2c3e50;
-  }
-  
-  #nav a.router-link-exact-active {
-    color: #0ed5f2;
-  }
-
   
