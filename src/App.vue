@@ -7,7 +7,7 @@
     tile
   >
     <v-toolbar app dense dark class="indigo darken-3">
-      <v-toolbar-side-icon @click="drawer=!drawer"></v-toolbar-side-icon>
+      <v-toolbar-side-icon id="burgermenu" @click="drawer=!drawer"></v-toolbar-side-icon>
 
       <v-toolbar-title>Adventure Hub</v-toolbar-title>
 
@@ -27,6 +27,7 @@
         <v-list-tile
           v-for="item in items"
           :key="item.title"
+          :id="items.id"
           router :to="item.route"
           active-class="indigo lighten-5 grey--text"
           @click="drawer=!drawer"
@@ -61,10 +62,10 @@ export default {
     return{
       drawer: false,
       items: [
-        { title: 'Home', icon: 'dashboard', route: '/' },
-        { title: 'About', icon: 'account_box', route: '/about' },
-        { title: 'Create Adventure', icon: 'gavel' , route: '/create' },
-        { title: 'Overview', icon: 'gavel', route: '/overview' }
+        { title: 'Home', icon: 'dashboard', route: '/', id: 'home' },
+        { title: 'About', icon: 'account_box', route: '/about', id: 'about' },
+        { title: 'Create Adventure', icon: 'gavel' , route: '/create', id: 'create' },
+        { title: 'Overview', icon: 'gavel', route: '/overview', id: 'overview' }
       ]
     }
   }
