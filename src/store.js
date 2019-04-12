@@ -49,6 +49,24 @@ const currentEditModule = {
       context.commit('currentPage', {
         id: result.data["page"][0]['page_id']
       });
+    },
+    async changeCurrentPage(context, payload) {
+      const result = await payload.apolloClient.query({
+        query: gql`
+           query GetData($key: Int!, $pageNr: Int!) {
+            page(where: {adventure_key: {_eq: $key}, page_nr: {_eq: $pageNr}}, limit: 1) {
+              page_id
+            }
+          }
+        `,
+        variables: {
+          key: context.state.adventure.id,
+          pageNr: payload.pageNr
+        }
+      });
+      context.commit('currentPage', {
+        id: result.data["page"][0]['page_id']
+      });
     }
   }
 }

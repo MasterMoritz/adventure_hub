@@ -2,8 +2,20 @@
   <div>
     <v-container>
       <v-layout row justify-center>
-        <v-flex xs12 sm6>
-          <v-text-field outline box readonly label="Adventure Title" :value="adventureData.title"></v-text-field>
+        <v-flex xs8 sm6>
+          <v-text-field solo box readonly label="Adventure Title" :value="adventureData.title"></v-text-field>
+        </v-flex>
+        <v-flex offset-xs1 xs2 md1>
+          <v-autocomplete
+            append-icon="search"
+            @keyup.enter="gotoPage"
+            @click:append="gotoPage"
+            solo
+            hint="Go to Page Nr."
+            persistent-hint
+            v-model="gotoPageNr"
+            :items="flatPageNumbers"
+          ></v-autocomplete>
         </v-flex>
       </v-layout>
     </v-container>
@@ -26,7 +38,8 @@ export default {
   },
   data() {
     return {
-      numbers: []
+      numbers: [],
+      gotoPageNr: null
     };
   },
   computed: {
@@ -35,9 +48,21 @@ export default {
     },
     pageData() {
       return this.$store.state.edit.page;
+    },
+    flatPageNumbers() {
+      return this.numbers.map(function(obj) {
+        return obj.page_nr;
+      });
     }
   },
   methods: {
+    async gotoPage() {
+      this.$store.dispatch("edit/changeCurrentPage", {
+        apolloClient: this.$apollo,
+        pageNr: this.gotoPageNr
+      });
+    },
+
     async updatePage(pageData) {
       try {
         //update page
@@ -164,7 +189,6 @@ export default {
   },
   apollo: {
     numbers: {
-      // Simple query that will update the 'hello' vue property
       query: gql`
         query getPagesNumbers($key: Int!) {
           numbers: page(where: { adventure_key: { _eq: $key } }) {
