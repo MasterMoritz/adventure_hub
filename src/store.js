@@ -19,6 +19,9 @@ const currentEditModule = {
     currentAdventure(state, data) {
       state.adventure.id = data.id;
       state.adventure.title = data.title;
+    },
+    currentPage(state, data) {
+      state.page.id = data.id;
     }
   },
   actions: {
@@ -30,6 +33,9 @@ const currentEditModule = {
               adventureKey
               name
             }
+            page(order_by: {page_nr: asc}, limit: 1, where: {adventure_key: {_eq: $key}}) {
+              page_id
+            }
           }
         `,
         variables: {
@@ -39,6 +45,9 @@ const currentEditModule = {
       context.commit('currentAdventure', {
         id: result.data["adventure"][0]['adventureKey'],
         title: result.data["adventure"][0]['name']
+      });
+      context.commit('currentPage', {
+        id: result.data["page"][0]['page_id']
       });
     }
   }

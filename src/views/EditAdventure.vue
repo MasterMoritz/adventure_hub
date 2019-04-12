@@ -9,7 +9,7 @@
     </v-container>
     
     <v-divider inset></v-divider>
-    <CreatePanel :pageNumbers="numbers"></CreatePanel>
+    <CreatePanel :pageNumbers="numbers" :pageId="pageData.id"></CreatePanel>
   </div>
 </template>
 
@@ -32,6 +32,9 @@ export default {
     adventureData() {
       return this.$store.state.edit.adventure;
     },
+    pageData() {
+      return this.$store.state.edit.page;
+    }
   },
   apollo: {
     numbers: {

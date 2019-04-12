@@ -71,7 +71,6 @@ export default {
     return {
       pageTitle: "Test",
       pageContent: this.text,
-      pageId: 0,
       pageNumber: 0,
       editText: true,
       newPages: [],
@@ -84,10 +83,8 @@ export default {
     };
   },
   props: {
-    title: String,
-    text: String,
-    choices: String,
-    pageNumbers: Array
+    pageNumbers: Array,
+    pageId: Number
   },
   computed: {
     pages() {
@@ -105,7 +102,7 @@ export default {
       });
     },
     async savePage() {
-
+      this.$emit('savePage', )
     }
   },
   apollo: {
